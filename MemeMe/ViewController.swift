@@ -16,6 +16,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var navBar: UIToolbar!
     @IBOutlet weak var toolBar: UIToolbar!
+    @IBOutlet weak var shareButton: UIBarButtonItem!
     
     let top_text = "TOP"
     let bottom_text = "BOTTOM"
@@ -34,7 +35,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTextFields()
+        
+        setTextField(textfield: topTextField, withText: "TOP")
+        setTextField(textfield: bottomTextField, withText: "BOTTOM")
+        
+        shareButton.isEnabled = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,43 +52,40 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         unsubscribeFromKeyboardNotifications()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     //MARK:- setting text fields method
-    func setTextFields() {
+    func setTextField(textfield: UITextField, withText: String) {
         
-        topTextField.delegate = self
-        bottomTextField.delegate = self
-        
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        
-        topTextField.textAlignment = NSTextAlignment.center
-        bottomTextField.textAlignment = NSTextAlignment.center
-        
-        topTextField.text = top_text
-        bottomTextField.text = bottom_text
+        textfield.delegate = self
+        textfield.defaultTextAttributes = memeTextAttributes
+        textfield.textAlignment = .center
+        textfield.text = withText
         
     }
     
     //MARK:- Buttons
 
-    //Album button
-    @IBAction func pickFromAlbum(_ sender: Any) {
-        
+    func presentImagePickerWith(sourceType: UIImagePickerController.SourceType) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        present(imagePicker, animated: true, completion: nil)
+        imagePicker.sourceType = sourceType
+        present(imagePicker, animated:true, completion:nil)
+    }
+
+    
+    
+    //Album button
+    @IBAction func pickFromAlbum(_ sender: Any) {
+        presentImagePickerWith(sourceType: UIImagePickerController.SourceType.photoLibrary)
         
     }
     
     //Camera Button
     @IBAction func pickFromCamera(_ sender: Any) {
-        
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .camera
-        present(imagePicker, animated: true, completion: nil)
-        
+        presentImagePickerWith(sourceType: UIImagePickerController.SourceType.camera)
     }
   
     //Share Button
@@ -92,6 +94,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let memedImg = generateMemedImage()
         let shareView = UIActivityViewController(activityItems: [memedImg], applicationActivities: nil)
         
+        shareView.completionWithItemsHandler = {
+            (activity, completed, items, error) in
+            if (completed){
+                self.save()
+            }
+        }
+            
         present(shareView, animated: true)
     }
     
@@ -102,6 +111,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         if let img = info[.originalImage] as? UIImage{
             imagePickerView.image = img
+            shareButton.isEnabled = true
         }
         
         dismiss(animated: true, completion: nil)
@@ -148,7 +158,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     func getKeyboardHeight(_ notification:Notification) -> CGFloat {
         let userInfo = notification.userInfo
-        let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
+        let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue
         return keyboardSize.cgRectValue.height
     }
     
@@ -167,8 +177,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func generateMemedImage() -> UIImage {
         
         // TODO: Hide toolbar and navbar
-        toolBar.isHidden = true
-        navBar.isHidden = true
+        configureBars(true)
         
         // Render view to an image
         UIGraphicsBeginImageContext(self.view.frame.size)
@@ -177,10 +186,16 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         UIGraphicsEndImageContext()
         
         // TODO: Show toolbar and navbar
-        toolBar.isHidden = false
-        navBar.isHidden = false
+        configureBars(false)
         
         return memedImage
+    }
+        
+    func configureBars(_ isHidden: Bool) {
+        
+        toolBar.isHidden = isHidden
+        navBar.isHidden = isHidden
+        
     }
     
     
