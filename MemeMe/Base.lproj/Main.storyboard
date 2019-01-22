@@ -38,17 +38,11 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gew-rf-Cij">
-                                <rect key="frame" x="67" y="290" width="241" height="107"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gew-rf-Cij">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleAspectFill" restorationIdentifier="topText" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Iq6-ul-Qg4">
-                                <rect key="frame" x="67" y="68" width="241" height="40"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" enablesReturnKeyAutomatically="YES"/>
-                            </textField>
                             <textField opaque="NO" contentMode="scaleAspectFill" restorationIdentifier="bottomText" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Qco-EP-3zq">
-                                <rect key="frame" x="67" y="536" width="241" height="40"/>
+                                <rect key="frame" x="50" y="536" width="275" height="17"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" enablesReturnKeyAutomatically="YES"/>
@@ -56,36 +50,39 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tGh-Ta-opI">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                 <items>
-                                    <barButtonItem title="Share" id="Ewp-oi-zCJ">
+                                    <barButtonItem systemItem="action" id="Ewp-oi-zCJ">
                                         <connections>
                                             <action selector="ShareAction:" destination="BYZ-38-t0r" id="0z0-ck-8oe"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
+                            <textField opaque="NO" contentMode="scaleAspectFill" restorationIdentifier="topText" contentHorizontalAlignment="center" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Iq6-ul-Qg4">
+                                <rect key="frame" x="50" y="114" width="275" height="21"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-CondensedBlack" family="Helvetica Neue" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Iq6-ul-Qg4" firstAttribute="top" secondItem="tGh-Ta-opI" secondAttribute="bottom" constant="24" id="4qp-Uf-441"/>
+                            <constraint firstItem="Iq6-ul-Qg4" firstAttribute="top" secondItem="tGh-Ta-opI" secondAttribute="bottom" constant="70" id="4qp-Uf-441"/>
                             <constraint firstItem="sFh-tn-chC" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="6F3-LG-edB"/>
                             <constraint firstItem="tGh-Ta-opI" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Da2-E7-bW9"/>
                             <constraint firstItem="tGh-Ta-opI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EQU-Be-5l0"/>
-                            <constraint firstItem="gew-rf-Cij" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="FUT-1V-UaV"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qco-EP-3zq" secondAttribute="trailing" constant="50" id="ErE-E6-0L3"/>
+                            <constraint firstItem="sFh-tn-chC" firstAttribute="top" secondItem="Qco-EP-3zq" secondAttribute="bottom" constant="70" id="H9B-LY-yO6"/>
                             <constraint firstItem="tGh-Ta-opI" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="HG9-kx-shY"/>
+                            <constraint firstItem="gew-rf-Cij" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="HSM-N3-ATr"/>
                             <constraint firstItem="sFh-tn-chC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="M73-Jh-Rlw"/>
-                            <constraint firstItem="gew-rf-Cij" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="67" id="W7H-mP-GFR"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Qco-EP-3zq" secondAttribute="bottom" constant="91" id="Yh4-B0-ka0"/>
-                            <constraint firstItem="Iq6-ul-Qg4" firstAttribute="leading" secondItem="Qco-EP-3zq" secondAttribute="leading" id="aUa-7e-Jap"/>
-                            <constraint firstItem="Iq6-ul-Qg4" firstAttribute="leading" secondItem="gew-rf-Cij" secondAttribute="leading" id="bkd-aP-dwH"/>
-                            <constraint firstItem="Iq6-ul-Qg4" firstAttribute="trailing" secondItem="Qco-EP-3zq" secondAttribute="trailing" id="mwR-q9-ltM"/>
-                            <constraint firstItem="sFh-tn-chC" firstAttribute="top" relation="greaterThanOrEqual" secondItem="gew-rf-Cij" secondAttribute="bottom" constant="211" id="pCu-oe-2gi"/>
-                            <constraint firstItem="gew-rf-Cij" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="270" id="pSO-jx-QZH"/>
-                            <constraint firstItem="gew-rf-Cij" firstAttribute="centerX" secondItem="sFh-tn-chC" secondAttribute="centerX" id="pl1-7o-Y0x"/>
+                            <constraint firstItem="Qco-EP-3zq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="MQ0-kD-fir"/>
+                            <constraint firstItem="gew-rf-Cij" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="WNN-Md-lUK"/>
+                            <constraint firstItem="Iq6-ul-Qg4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="Xhy-ag-vGb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gew-rf-Cij" secondAttribute="bottom" id="ed5-eR-kDp"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Iq6-ul-Qg4" secondAttribute="trailing" constant="50" id="hR3-9g-ICZ"/>
                             <constraint firstItem="sFh-tn-chC" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="rxR-2V-GEZ"/>
-                            <constraint firstItem="Iq6-ul-Qg4" firstAttribute="trailing" secondItem="gew-rf-Cij" secondAttribute="trailing" id="tRG-0K-8cW"/>
                             <constraint firstItem="Qco-EP-3zq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="516" id="tcN-gV-siA"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Iq6-ul-Qg4" secondAttribute="bottom" constant="559" id="tkn-uU-oLs"/>
-                            <constraint firstItem="Iq6-ul-Qg4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="48" id="zTj-sm-vFN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gew-rf-Cij" secondAttribute="trailing" id="zbK-6I-LVA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -94,6 +91,7 @@
                         <outlet property="cameraButton" destination="AUy-1c-FrE" id="dRp-El-v2z"/>
                         <outlet property="imagePickerView" destination="gew-rf-Cij" id="eJg-23-TCJ"/>
                         <outlet property="navBar" destination="tGh-Ta-opI" id="U1o-fA-ad9"/>
+                        <outlet property="shareButton" destination="Ewp-oi-zCJ" id="9xq-4c-qbk"/>
                         <outlet property="toolBar" destination="sFh-tn-chC" id="P5u-5L-mXG"/>
                         <outlet property="topTextField" destination="Iq6-ul-Qg4" id="S1a-Kw-S6G"/>
                     </connections>
