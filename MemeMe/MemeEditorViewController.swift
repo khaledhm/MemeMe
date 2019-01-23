@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate{
+class MemeEditorViewController: UIViewController{
 
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var cameraButton: UIButton!
@@ -18,18 +18,18 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
     
-    let top_text = "TOP"
-    let bottom_text = "BOTTOM"
+    let topText = "TOP"
+    let bottomText = "BOTTOM"
     
     let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
     let spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
     
     
     let memeTextAttributes: [NSAttributedString.Key: Any] = [
-        NSAttributedString.Key.strokeColor: UIColor.black,
-        NSAttributedString.Key.foregroundColor: UIColor.white,
-        NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
-        NSAttributedString.Key.strokeWidth: -2]
+        .strokeColor: UIColor.black,
+        .foregroundColor: UIColor.white,
+        .font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
+        .strokeWidth: -2]
     
     
     
@@ -43,6 +43,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
         subscribeToKeyboardNotifications()
     }
@@ -104,38 +105,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         present(shareView, animated: true)
     }
     
-    //MARK:- ImagePicker Delegate Methods
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        //print("Picked!!")
-        
-        if let img = info[.originalImage] as? UIImage{
-            imagePickerView.image = img
-            shareButton.isEnabled = true
-        }
-        
-        dismiss(animated: true, completion: nil)
-        
-    }
-    
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    //MARK:- Text fields methods
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        if textField.text == top_text || textField.text == bottom_text{
-            textField.text = ""
-        }
-        
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true;
-    }
     
     //MARK:- Keyboard shifting methods
     
@@ -199,5 +168,42 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     
+}
+
+extension MemeEditorViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    //MARK:- ImagePicker Delegate Methods
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        //print("Picked!!")
+        
+        if let img = info[.originalImage] as? UIImage{
+            imagePickerView.image = img
+            shareButton.isEnabled = true
+        }
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+}
+
+extension MemeEditorViewController: UITextFieldDelegate {
+    //MARK:- Text fields methods
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField.text == topText || textField.text == bottomText{
+            textField.text = ""
+        }
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true;
+    }
 }
 
