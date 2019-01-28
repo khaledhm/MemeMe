@@ -11,7 +11,7 @@ import UIKit
 class MemeEditorViewController: UIViewController{
 
     @IBOutlet weak var imagePickerView: UIImageView!
-    @IBOutlet weak var cameraButton: UIButton!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var navBar: UIToolbar!
@@ -40,6 +40,8 @@ class MemeEditorViewController: UIViewController{
         setTextField(textfield: bottomTextField, withText: "BOTTOM")
         
         shareButton.isEnabled = false
+        
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -139,7 +141,12 @@ class MemeEditorViewController: UIViewController{
     //MARK:- Saving meme
     
     func save() {
-        _ = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImg: imagePickerView.image!, memeImg: generateMemedImage())
+        let meme = Meme(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImg: imagePickerView.image!, memeImg: generateMemedImage())
+        
+        // Add it to the memes array in the Application Delegate
+        let object = UIApplication.shared.delegate
+        let appDelegate = object as! AppDelegate
+        appDelegate.memes.append(meme)
     }
     
     
