@@ -21,14 +21,18 @@ class SendMemeTableViewController: UITableViewController {
         super.viewDidLoad()
 
         self.tabBarController?.tabBar.isHidden = false
+        
+        //print("table is set " + String(memes.count))
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
-
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return self.memes.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,10 +46,5 @@ class SendMemeTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
-
     
 }

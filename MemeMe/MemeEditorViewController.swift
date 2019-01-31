@@ -14,9 +14,9 @@ class MemeEditorViewController: UIViewController{
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
-    @IBOutlet weak var navBar: UIToolbar!
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     let topText = "TOP"
     let bottomText = "BOTTOM"
@@ -42,6 +42,7 @@ class MemeEditorViewController: UIViewController{
         shareButton.isEnabled = false
         
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,6 +108,12 @@ class MemeEditorViewController: UIViewController{
         present(shareView, animated: true)
     }
     
+    @IBAction func cancelAction(_ sender: Any) {
+        
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
+        navigationController?.popViewController(animated: true)
+    }
     
     //MARK:- Keyboard shifting methods
     
@@ -147,6 +154,9 @@ class MemeEditorViewController: UIViewController{
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(meme)
+        
+        //print("Save " + String(appDelegate.memes.count))
+        cancelAction(self)
     }
     
     
